@@ -16,7 +16,7 @@ var compileT = function(time, musexpr, notes){
             left = compileT(time, musexpr.left, notes);
             right = compileT(time, musexpr.right, notes);
             break;
-        case 'note':
+        default:
             musexpr.start = time;
             notes.push(musexpr);
             break;
@@ -35,17 +35,24 @@ var endTime = function(time, expr){
 };
 
 var melody = { 
+	tag: 'seq',
+	left: { 
 		tag: 'seq',
-		left: { 
+		left: { tag: 'note', pitch: 'a4', dur: 250 },
+		right: { tag: 'note', pitch: 'b4', dur: 250 } 
+	},
+	right:{ 
+		tag: 'seq',
+		left: {
 			tag: 'seq',
-			left: { tag: 'note', pitch: 'a4', dur: 250 },
-			right: { tag: 'note', pitch: 'b4', dur: 250 } 
+			left: {
+				tag: 'rest',
+				dur: 100
+			},
+			right: {tag: 'note', pitch: 'c4', dur: 500}
 		},
-		right:{ 
-			tag: 'seq',
-			left: { tag: 'note', pitch: 'c4', dur: 500 },
-			right: { tag: 'note', pitch: 'd4', dur: 500 } 
-		} 
+		right: { tag: 'note', pitch: 'd4', dur: 500 } 
+	} 
 };
 
 console.log(melody);
