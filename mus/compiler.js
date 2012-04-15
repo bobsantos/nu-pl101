@@ -18,6 +18,7 @@ var compileT = function(time, musexpr, notes){
             break;
         default:
             musexpr.start = time;
+			musexpr.pitch = toMidi(musexpr.pitch);
             notes.push(musexpr);
             break;
     }
@@ -32,6 +33,14 @@ var endTime = function(time, expr){
 		default:
 			return time + expr.dur;
 	}
+};
+
+var toMidi = function(pitch){
+	if(pitch){
+		return 12 + 12 * (pitch.charCodeAt(1) - 48) + (pitch.charCodeAt(0) - 97);
+	}
+	
+	return 0;
 };
 
 var melody = { 
