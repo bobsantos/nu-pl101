@@ -35,9 +35,11 @@ var endTime = function(time, expr){
 	}
 };
 
+var pitchLetters = {c: 0, d: 2, e: 4, f: 5, g: 7, a: 9, b: 11};
+
 var toMidi = function(pitch){
 	if(pitch){
-		return 12 + 12 * (pitch.charCodeAt(1) - 48) + (pitch.charCodeAt(0) - 97);
+		return 12 + 12 * (parseInt(pitch[1])) + (pitchLetters[pitch[0]]);
 	}
 	
 	return 0;
@@ -54,10 +56,7 @@ var melody = {
 		tag: 'seq',
 		left: {
 			tag: 'seq',
-			left: {
-				tag: 'rest',
-				dur: 100
-			},
+			left: {tag: 'rest', dur: 100},
 			right: {tag: 'note', pitch: 'c4', dur: 500}
 		},
 		right: { tag: 'note', pitch: 'd4', dur: 500 } 
